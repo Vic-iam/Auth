@@ -1,0 +1,9 @@
+.index{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text{
+  font-size: 2rem;
+}
