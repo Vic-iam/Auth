@@ -1,9 +1,39 @@
-import React from 'react'
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../authen/AuthProvider';
+import DefaultLayout from '../Layout/DefaultLayout'
+import { useState } from 'react';
 
-export default function Signup() {
-    return (
-        <>
-            <div>Signup</div>
-        </>
-    )
+export default function Login() {
+
+    const [name, setName] = useState("");
+    const [username, setUserName] = useState("");
+    const [password, setPassWord] = useState("");
+    const auth = useAuth();
+
+
+    if (auth.isAuthenticated) {
+        return <Navigate to="/dashboard" />;
+    }
+    
+return (
+    <DefaultLayout>
+        <form style={{
+            display: "grid", padding: "20px", justifyContent: "center", alignItems: "center"
+        }}>
+            <h1>Signup</h1>
+
+            <label>Name</label>
+            <input type='name' value={name} onChange={(e) => setName(e.target.value)} />
+
+            <label>Username</label>
+            <input type='text' value={username} onChange={(e) => setUserName(e.target.value)} />
+
+            <label>Password</label>
+            <input type='password' value={password} onChange={(e) => setPassWord(e.target.value)} />
+
+            <button>Iniciar Sesion</button>
+        </form>
+    </DefaultLayout>
+
+)
 }

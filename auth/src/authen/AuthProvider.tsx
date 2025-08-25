@@ -1,22 +1,27 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, ReactNode } from "react";
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-const AuthContext = createContext({
-    isAuhtenticated: false
-})
+interface AuthContextType {
+  isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
+}
 
-export function AuthProvider({children}: AuthProviderProps){
-    
-    const [isAuthenticated, setIsAuhtenticated] = useState(false)
+const AuthContext = createContext<AuthContextType>({
+  isAuthenticated: false,
+  setIsAuthenticated: () => {},
+});
 
-    return(
-        <AuthContext.Provider value={{isAuthenticated}}>
-            {children}  
-        </AuthContext.Provider>
-    )
+export default function AuthProvider({ children }: AuthProviderProps) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export const useAuth = () => useContext(AuthContext);
