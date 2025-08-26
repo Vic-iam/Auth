@@ -1,4 +1,4 @@
-import { Children } from "react"
+import { Children, ReactNode } from "react"
 import { Link } from "react-router-dom"
 
 
