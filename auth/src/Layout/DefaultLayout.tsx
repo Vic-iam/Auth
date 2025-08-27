@@ -17,9 +17,9 @@ interface DefaultLayoutProps {
 export default function DefaultLayout({children}: DefaultLayoutProps) {
     return (
         <>
-            <header style={{backgroundColor: "silver", height: "80px"}}>
+            <header style={{backgroundColor: "white", height: "80px",}}>
                 <nav style={{padding: "20px"}}>
-                    <ul style={{fontSize: "2rem", display: "flex",listStyle: "none", gap:"10px"}}>
+                    <ul style={{fontSize: "2rem", display: "flex",justifyContent: "center",listStyle: "none", gap:"10px"}}>
                         <li>
                             <Link style={{color: "black", textDecoration: "none"}} to="/">Home</Link>
                         </li>

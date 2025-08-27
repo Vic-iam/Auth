@@ -46,20 +46,27 @@ export default function Login() {
 
     return (
         <DefaultLayout>
-            <form onSubmit={handleSubmit}
-                style={{
-                    display: "grid", padding: "20px", justifyContent: "center", alignItems: "center"
+            <form style={{display: "grid", justifyContent: "center"}}  onSubmit={handleSubmit}>
+                <div style={{
+                    display: "grid", backgroundColor: "white", height: "300px",
+                     justifyContent: "center", margin: "50px", padding: "50px",boxShadow: "0 0 5px white"
                 }}>
-                <h1>Login</h1>
-                {!!errorResponse && <div style={{ padding: "10px", backgroundColor: "#FF8A92" }}><p style={{ color: "#D1000E " }}>{errorResponse}</p></div>}
+                    <h1 style={{ padding: "20px", textAlign: "center", color: "black", fontFamily: "arial" }}>Login</h1>
+                    {!!errorResponse && <div style={{ padding: "10px", backgroundColor: "#FB2C36" }}><p style={{color: "white" }}>{errorResponse}</p></div>}
 
-                <label>Username</label>
-                <input type='text' value={username} onChange={(e) => setUserName(e.target.value)} />
+                    <label style={{ color: "black", fontSize: "1.3rem", padding: "1px" }}>Username</label>
+                    <input style={{ height: "20px", width: "300px" }} type='text' value={username} onChange={(e) => setUserName(e.target.value)} />
 
-                <label>Password</label>
-                <input type='password' value={password} onChange={(e) => setPassWord(e.target.value)} />
+                    <label style={{ color: "black", fontSize: "1.3rem", padding: "1px" }}>Password</label>
+                    <input style={{ height: "20px", width: "300px" }} type='password' value={password} onChange={(e) => setPassWord(e.target.value)} />
 
-                <button>Iniciar Sesion</button>
+                    <div style={{ padding: "10px", textAlign: "center" }}>
+                        <button style={{
+                            width: "150px", height: "30px", backgroundColor: "black", color: "white", border: "none",
+                            borderRadius: "10px"
+                        }}>Iniciar Sesion</button>
+                    </div>
+                </div>
             </form>
         </DefaultLayout>
 
