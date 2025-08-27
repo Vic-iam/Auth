@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../authen/AuthProvider';
 import DefaultLayout from '../Layout/DefaultLayout';
 import { API_URL } from "../authen/contants"; 
@@ -8,8 +8,10 @@ export default function Login() {
     const [name, setName] = useState("");
     const [username, setUserName] = useState("");
     const [password, setPassWord] = useState("");
+    const [errorResponse, setErrorResponse] = useState("");
     
     const auth = useAuth();
+    const goTo = useNavigate();
 
     if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
 
@@ -25,8 +27,14 @@ export default function Login() {
 
             if (response.ok) {
                 console.log("User created successfully");
+                setErrorResponse("");
+
+                goTo("/");
             } else {
                 console.log("Something went wrong");
+                const json = await response.json();
+                setErrorResponse(json.body.error);
+                return;
             }
         } catch (error) {
             console.error(error);
@@ -40,6 +48,7 @@ export default function Login() {
                 style={{ display: "grid", padding: "20px", justifyContent: "center", alignItems: "center" }}
             >
                 <h1>Signup</h1>
+                {!!errorResponse && <div style={{padding: "10px", backgroundColor: "#FF8A92"}}><p style={{color: "#D1000E "}}>{errorResponse}</p></div>}
                 <label>Name</label>
                 <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
 
