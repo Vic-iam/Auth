@@ -55,10 +55,10 @@ export default function Login() {
                     {!!errorResponse && <div style={{ padding: "10px", backgroundColor: "#FB2C36" }}><p style={{color: "white" }}>{errorResponse}</p></div>}
 
                     <label style={{ color: "black", fontSize: "1.3rem", padding: "1px" }}>Username</label>
-                    <input style={{ height: "20px", width: "300px" }} type='text' value={username} onChange={(e) => setUserName(e.target.value)} />
+                    <input style={{ height: "20px", width: "300px" }} placeholder='Writhe your username' type='text' value={username} onChange={(e) => setUserName(e.target.value)} />
 
                     <label style={{ color: "black", fontSize: "1.3rem", padding: "1px" }}>Password</label>
-                    <input style={{ height: "20px", width: "300px" }} type='password' value={password} onChange={(e) => setPassWord(e.target.value)} />
+                    <input style={{ height: "20px", width: "300px" }} placeholder='Writhe your password' type='password' value={password} onChange={(e) => setPassWord(e.target.value)} />
 
                     <div style={{ padding: "10px", textAlign: "center" }}>
                         <button style={{
