@@ -31,7 +31,7 @@ export default function Login() {
                 console.log("Login successful");
                 setErrorResponse("");
                 const json = (await response.json()) as AuthResponse;
-
+                
                 if (json.body.accessToken && json.body.refreshToken) {
                     auth.saveUser(json);
                     goTo("/dashboard")
