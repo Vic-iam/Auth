@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../authen/AuthProvider';
 import { API_URL } from "../authen/contants";
+import { AuthResponse } from "../types/types"
 
 
 export default function Login() {
@@ -29,8 +30,14 @@ export default function Login() {
             if (response.ok) {
                 console.log("Login successful");
                 setErrorResponse("");
+                const json = (await response.json()) as AuthResponse;
 
-                goTo("/dashboard");
+                if (json.body.accessToken && json.body.refreshToken) {
+                    auth.saveUser(json);
+                    goTo("/dashboard")
+                }
+
+                //      goTo("/dashboard");
             } else {
                 console.log("Something went wrong");
                 const json = await response.json();
@@ -44,15 +51,16 @@ export default function Login() {
 
     if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
 
+
     return (
         <DefaultLayout>
-            <form style={{display: "grid", justifyContent: "center"}}  onSubmit={handleSubmit}>
+            <form style={{ display: "grid", justifyContent: "center" }} onSubmit={handleSubmit}>
                 <div style={{
                     display: "grid", backgroundColor: "white", height: "300px",
-                     justifyContent: "center", margin: "50px", padding: "50px",boxShadow: "0 0 5px white"
+                    justifyContent: "center", margin: "50px", padding: "50px", boxShadow: "0 0 5px white"
                 }}>
                     <h1 style={{ padding: "20px", textAlign: "center", color: "black", fontFamily: "arial" }}>Login</h1>
-                    {!!errorResponse && <div style={{ padding: "10px", backgroundColor: "#FB2C36" }}><p style={{color: "white" }}>{errorResponse}</p></div>}
+                    {!!errorResponse && <div style={{ padding: "10px", backgroundColor: "#FB2C36" }}><p style={{ color: "white" }}>{errorResponse}</p></div>}
 
                     <label style={{ color: "black", fontSize: "1.3rem", padding: "1px" }}>Username</label>
                     <input style={{ height: "20px", width: "300px" }} placeholder='Writhe your username' type='text' value={username} onChange={(e) => setUserName(e.target.value)} />
