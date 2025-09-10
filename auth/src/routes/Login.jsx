@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../authen/AuthProvider';
 import { API_URL } from "../authen/contants";
-import { AuthResponse } from "../types/types"
 
 
 export default function Login() {
@@ -30,11 +29,11 @@ export default function Login() {
             if (response.ok) {
                 console.log("Login successful");
                 setErrorResponse("");
-                const json = (await response.json()) as AuthResponse;
-                
-                if (json.body.accessToken && json.body.refreshToken) {
+                const json = await response.json();
+
+                if (json.body?.accessToken && json.body?.refreshToken) {
                     auth.saveUser(json);
-                    goTo("/dashboard")
+                    goTo("/dashboard");
                 }
 
                 //      goTo("/dashboard");
@@ -46,6 +45,7 @@ export default function Login() {
             }
         } catch (error) {
             console.error(error);
+            setErrorResponse("No se pudo conectar con el servidor");
         }
     }
 

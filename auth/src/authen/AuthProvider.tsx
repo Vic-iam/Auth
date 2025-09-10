@@ -34,8 +34,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     setRefreshToken(userData.body.refreshToken);
     
     localStorage.setItem("token", JSON.stringify(userData.body.refreshToken))
-
-  }
+    setIsAuthenticated(true);
+  } 
  
  
   return (
